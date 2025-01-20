@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+const { using } = require("rxjs")
+
 describe('First Test Suite', () => {
 
     it('First Test', () => {
@@ -62,5 +64,33 @@ describe('First Test Suite', () => {
           .find('nb-checkbox')
           .click({ force: true })
     })
+
+    it.only('Save the subject of the command', () => {
+        cy.visit('/')
+        cy.contains('Forms').click()
+        cy.contains('Form Layouts').click()
+
+        cy.contains('nb-card', 'Using the Grid').find('[for="inputEmail1"]').should('contain', 'Email')
+        cy.contains('nb-card', 'Using the Grid').find('[for="inputPassword2"]').should('contain', 'Password')
+
+
+        //CANT DO THIS
+        // const usingTheGrid = cy.contains('nb-card', 'Using the Grid')
+        // usingTheGrid.find('[for="inputEmail1"]').should('contain', 'Email')
+        // usingTheGrid.find('[for="inputPassword2"]').should('contain', 'Password')
+
+        // 1 Cypress alias
+        cy.contains('nb-card', 'Using the Grid').as('usingTheGrid')
+        cy.get('@usingTheGrid').find('[for="inputEmail1"]').should('contain', 'Email')
+        cy.get('@usingTheGrid').find('[for="inputPassword2"]').should('contain', 'Password')
+
+        // 2 Cypress .then() methods
+        cy.contains('nb-card', 'Using the Grid').then( usingTheGridForm => {
+            cy.wrap(usingTheGridForm).find('[for="inputEmail1"]').should('contain', 'Email')
+            cy.wrap(usingTheGridForm).find('[for="inputPassword2"]').should('contain', 'Password')
+        })
+
+
+    })  
 
 })
