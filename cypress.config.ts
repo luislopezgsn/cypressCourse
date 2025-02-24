@@ -2,17 +2,11 @@ import { defineConfig } from "cypress";
 
 export default defineConfig({
   e2e: {
+    baseUrl: "http://localhost:4200", // Replace with your localhost URL
+    specPattern: "cypress/e2e/**/*.{js,jsx,ts,tsx}",
     setupNodeEvents(on, config) {
-      // implement node event listeners here
+      // Implement node event listeners here if needed
+      return config;
     },
   },
 });
-
-
-module.exports = {
-  e2e: {
-    baseUrl: 'http://localhost:4200', // Replace with your localhost URL
-    specPattern: "cypress/e2e/**/*.{js,jsx,ts,tsx}"
-  },
-};
-
