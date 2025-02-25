@@ -1,8 +1,8 @@
 /// <reference types="cypress" />
-import FormLayoutsPage from '../pages/FormLayoutsPage';
-import DatepickerPage from '../pages/DatepickerPage';
-import TablesPage from '../pages/TablesPage';
-import NavigationPage from '../pages/NavigationPage';
+import FormLayoutsPage from '../pages/FormLayoutsPage.js';
+import DatepickerPage from '../pages/DatepickerPage.js';
+import TablesPage from '../pages/TablesPage.js';
+import NavigationPage from '../pages/NavigationPage.js';
 
 describe('Test Suite with Page Object Model', () => {
   const formLayoutsPage = new FormLayoutsPage();
