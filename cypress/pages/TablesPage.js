@@ -1,7 +1,7 @@
 class TablesPage {
   editUserAge(name, age) {
     cy.get('tbody').contains('tr', name).then(tableRow => {
-      cy.get('nav.fixed').invoke('hide'); // ✅ Hide blocking nav
+      cy.get('nav.fixed').invoke('hide'); 
 
       cy.wrap(tableRow).find('.nb-edit')
         .scrollIntoView()
@@ -22,7 +22,7 @@ class TablesPage {
   }
 
   addNewUser(firstName, lastName) {
-    cy.get('nav.fixed').invoke('hide'); // ✅ Hide blocking nav
+    cy.get('nav.fixed').invoke('hide'); 
 
     cy.get('thead').find('.nb-plus')
       .scrollIntoView()
