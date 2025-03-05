@@ -12,7 +12,6 @@ class DatepickerPage {
 
       cy.log('🔵 Expected Date:', dateToAssert);
 
-      // Wait for datepicker to open
       cy.get('nb-calendar-day-picker', { timeout: 5000 }).should('be.visible');
 
       function selectDate() {
@@ -24,7 +23,6 @@ class DatepickerPage {
             if (!dateAttribute.includes(futureMonth) || !dateAttribute.includes(futureYear)) {
               cy.get('[data-name="chevron-right"]').click();
               
-              // Wait for the next month to appear before proceeding
               cy.get('nb-calendar-navigation')
                 .invoke('attr', 'ng-reflect-date')
                 .should('include', futureMonth)
@@ -33,12 +31,11 @@ class DatepickerPage {
                   selectDate();
                 });
             } else {
-              cy.wait(1000); // Ensure calendar updates fully
+              cy.wait(1000);
               
-              cy.get('nb-calendar-day-picker')
-                .find('nb-calendar-day-cell')
-                .should('exist')
-                .contains(futureDay)
+              cy.get('nb-calendar-day-picker nb-calendar-day-cell')
+                .contains(new RegExp(`^${futureDay}$`))  // Ensures exact day match
+                .should('be.visible')
                 .click();
             }
           });
@@ -46,7 +43,6 @@ class DatepickerPage {
 
       selectDate();
 
-      // Ensure the selected date appears in the input field
       cy.wrap(input)
         .invoke('prop', 'value')
         .should('contain', dateToAssert);
